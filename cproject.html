@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Atherl Dashboard</title>
+
+<style>
+:root{
+    --bg:#020c1b;
+    --sidebar:#061426;
+    --card:#0b1f3a;
+    --text:#cfe9ff;
+    --muted:#7fa8c9;
+    --neon:#00f5ff;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family: 'Segoe UI', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    display:flex;
+}
+
+/* Sidebar */
+.sidebar{
+    width:220px;
+    height:100vh;
+    background: var(--sidebar);
+    padding:20px;
+}
+
+.sidebar h2{
+    color: var(--neon);
+    margin-bottom:30px;
+}
+
+.sidebar ul{
+    list-style:none;
+}
+
+.sidebar ul li{
+    padding:12px;
+    margin:10px 0;
+    color: var(--muted);
+    cursor:pointer;
+    border-radius:8px;
+}
+
+.sidebar ul li:hover{
+    background: rgba(0,245,255,0.1);
+    color:white;
+}
+
+/* Main */
+.main{
+    flex:1;
+    padding:20px;
+}
+
+/* Top Bar */
+.topbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+}
+
+.topbar h3{
+    color: var(--muted);
+}
+
+/* Title */
+.title{
+    margin-bottom:20px;
+}
+
+.title h1{
+    font-size:26px;
+}
+
+.title p{
+    color: var(--muted);
+}
+
+/* Cards */
+.grid{
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap:20px;
+}
+
+/* Card */
+.card{
+    background: var(--card);
+    padding:20px;
+    border-radius:12px;
+    position:relative;
+    transition:0.3s;
+}
+
+.card:hover{
+    transform: translateY(-5px);
+    box-shadow:0 0 15px rgba(0,245,255,0.2);
+}
+
+.tag{
+    font-size:10px;
+    background: rgba(0,245,255,0.2);
+    color: var(--neon);
+    padding:4px 8px;
+    border-radius:6px;
+    display:inline-block;
+    margin-bottom:10px;
+}
+
+.card h3{
+    margin-bottom:8px;
+}
+
+.card p{
+    font-size:13px;
+    color: var(--muted);
+    margin-bottom:15px;
+}
+
+/* Progress */
+.progress{
+    height:5px;
+    background:#123;
+    border-radius:5px;
+    overflow:hidden;
+}
+
+.progress span{
+    display:block;
+    height:100%;
+    background: var(--neon);
+}
+
+/* Big Card */
+.big{
+    grid-column: span 2;
+}
+
+/* Button */
+.btn{
+    margin-top:15px;
+    padding:10px;
+    border:none;
+    background: transparent;
+    border:1px solid var(--neon);
+    color: var(--neon);
+    border-radius:6px;
+    cursor:pointer;
+}
+
+.btn:hover{
+    background: var(--neon);
+    color:black;
+}
+
+/* Right small graph box */
+.graph{
+    background:#061426;
+    padding:15px;
+    border-radius:10px;
+    margin-top:10px;
+    height:120px;
+    display:flex;
+    align-items:flex-end;
+    gap:6px;
+}
+
+.bar{
+    width:10px;
+    background: var(--neon);
+}
+</style>
+
+</head>
+<body>
+
+<!-- Sidebar -->
+<div class="sidebar">
+    <h2>Atherl</h2>
+    <ul>
+        <li>Home</li>
+        <li>Projects</li>
+        <li>Feedback</li>
+        <li>Profile</li>
+    </ul>
+</div>
+
+<!-- Main -->
+<div class="main">
+
+    <div class="topbar">
+        <h3>KINETIC PRECISION</h3>
+        <div>⚙️ 🔔</div>
+    </div>
+
+    <div class="title">
+        <h1>Project Clusters</h1>
+        <p>Orchestrate and monitor active AI deployment nodes</p>
+    </div>
+
+    <div class="grid">
+
+        <!-- Card 1 -->
+        <div class="card">
+            <span class="tag">NEURAL EDGE</span>
+            <h3>Alpha Stream Pipeline</h3>
+            <p>Real-time telemetry processing system</p>
+
+            <div class="progress">
+                <span style="width:54%"></span>
+            </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="card">
+            <span class="tag">QUANTUM CORE</span>
+            <h3>Vanguard Synth Node</h3>
+            <p>Synthetic data generation engine</p>
+
+            <div class="progress">
+                <span style="width:42%"></span>
+            </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="card">
+            <span class="tag">ACTIVE MASTER</span>
+            <h3>Horizon-09 Gateway</h3>
+            <p>Main interface for collaboration</p>
+
+            <div class="progress">
+                <span style="width:95%"></span>
+            </div>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="card">
+            <span class="tag">STANDBY</span>
+            <h3>Deep Archives V2</h3>
+            <p>Legacy cold storage node</p>
+        </div>
+
+        <!-- Big Card -->
+        <div class="card big">
+            <span class="tag">GLOBAL PRIORITY</span>
+            <h3>Project: Chronos-Sync</h3>
+            <p>
+                Unified clock synchronization for distributed clusters.
+                Maintains temporal integrity.
+            </p>
+
+            <p><b>Status:</b> SYNCHRONIZED</p>
+            <p><b>Load:</b> LOW (12%)</p>
+
+            <button class="btn">CONFIGURE</button>
+
+            <!-- Graph -->
+            <div class="graph">
+                <div class="bar" style="height:40%"></div>
+                <div class="bar" style="height:70%"></div>
+                <div class="bar" style="height:60%"></div>
+                <div class="bar" style="height:80%"></div>
+                <div class="bar" style="height:50%"></div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

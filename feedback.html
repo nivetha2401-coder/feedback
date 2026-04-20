@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Feedback Dashboard</title>
+
+<style>
+:root{
+    --bg:#020c1b;
+    --sidebar:#061426;
+    --card:#0b1f3a;
+    --text:#cfe9ff;
+    --muted:#7fa8c9;
+    --accent:#00bcd4;
+}
+
+body{
+    margin:0;
+    font-family:'Segoe UI';
+    background:var(--bg);
+    color:var(--text);
+}
+
+.container{
+    display:flex;
+    height:100vh;
+}
+
+/* SIDEBAR */
+.sidebar{
+    width:220px;
+    background:var(--sidebar);
+    padding:20px;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+}
+
+.logo{
+    font-size:22px;
+    color:var(--accent);
+}
+
+/* MENU */
+.menu a{
+    display:block;
+    padding:10px;
+    margin-bottom:10px;
+    color:var(--muted);
+    text-decoration:none;
+    border-radius:6px;
+    cursor:pointer;
+}
+
+.menu a:hover{
+    background:var(--card);
+    color:var(--accent);
+}
+
+/* PROFILE */
+.profile{
+    display:flex;
+    gap:10px;
+    align-items:center;
+    border-top:1px solid rgba(255,255,255,0.05);
+    padding-top:10px;
+    cursor:pointer; /* 🔥 clickable */
+}
+
+.profile img{
+    width:35px;
+    height:35px;
+    border-radius:50%;
+}
+
+/* INBOX */
+.inbox{
+    width:280px;
+    padding:15px;
+    border-right:1px solid rgba(255,255,255,0.05);
+}
+
+.message{
+    padding:12px;
+    margin-bottom:10px;
+    background:var(--card);
+    border-radius:6px;
+    cursor:pointer;
+}
+
+/* CONTENT */
+.content{
+    flex:1;
+    padding:20px;
+}
+
+.chat-box{
+    background:var(--card);
+    padding:15px;
+    border-radius:10px;
+    height:60vh;
+    overflow-y:auto;
+    margin-bottom:10px;
+}
+
+.msg{
+    margin-bottom:12px;
+    padding:10px;
+    border-radius:6px;
+    max-width:70%;
+}
+
+.client-msg{ background:#102a4c; }
+.admin-msg{ background:#0f5132; margin-left:auto; }
+
+textarea{
+    width:100%;
+    height:80px;
+    background:#081424;
+    border:none;
+    color:white;
+    padding:10px;
+    border-radius:6px;
+}
+
+button{
+    margin-top:10px;
+    padding:10px 20px;
+    background:var(--accent);
+    border:none;
+    border-radius:6px;
+    cursor:pointer;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+
+        <div>
+            <div class="logo">Atherl</div>
+
+            <div class="menu">
+                <a onclick="goTo('dashboard.html')">Home</a>
+                <a onclick="goTo('projects.html')">Projects</a>
+                <a onclick="goTo('feedback.html')">Feedback</a>
+                <a onclick="goTo('profile.html')">Profile</a>
+            </div>
+        </div>
+
+        <!-- CLICKABLE PROFILE -->
+        <div class="profile" onclick="goProfile()">
+            <img src="https://i.pravatar.cc/40">
+            <div>
+                <strong>Admin</strong><br>
+                <small style="color:var(--muted)">Online</small>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- INBOX -->
+    <div class="inbox">
+        <h3>Inbox</h3>
+
+        <div class="message" onclick="loadChat(0)">Client A - Performance</div>
+        <div class="message" onclick="loadChat(1)">Client B - API Issue</div>
+        <div class="message" onclick="loadChat(2)">Client C - Login Delay</div>
+    </div>
+
+    <!-- CONTENT -->
+    <div class="content">
+
+        <h3 id="chatTitle">Select a conversation</h3>
+
+        <div class="chat-box" id="chatBox"></div>
+
+        <textarea id="responseBox" placeholder="Write response..."></textarea>
+        <button onclick="sendResponse()">Send</button>
+
+    </div>
+
+</div>
+
+<script>
+
+/* NAVIGATION */
+function goTo(page){
+    window.location.href = page;
+}
+
+function goProfile(){
+    window.location.href = "profile.html";
+}
+
+/* CHAT DATA */
+const chats = [
+    { name: "Client A", messages: [{ sender: "client", text: "App performance drops during peak usage." }] },
+    { name: "Client B", messages: [{ sender: "client", text: "Need updated API documentation." }] },
+    { name: "Client C", messages: [{ sender: "client", text: "Login process is too slow." }] }
+];
+
+let currentChat = null;
+
+function loadChat(index){
+    currentChat = index;
+    document.getElementById("chatTitle").innerText = chats[index].name;
+
+    const chatBox = document.getElementById("chatBox");
+    chatBox.innerHTML = "";
+
+    chats[index].messages.forEach(msg=>{
+        const div = document.createElement("div");
+        div.classList.add("msg", msg.sender === "client" ? "client-msg" : "admin-msg");
+        div.innerHTML = `<strong>${msg.sender==="client"?chats[index].name:"You"}:</strong> ${msg.text}`;
+        chatBox.appendChild(div);
+    });
+}
+
+function sendResponse(){
+    const text = document.getElementById("responseBox").value;
+
+    if(currentChat === null) return alert("Select a conversation first");
+    if(text.trim() === "") return alert("Response cannot be empty");
+
+    chats[currentChat].messages.push({ sender:"admin", text:text });
+
+    document.getElementById("responseBox").value="";
+    loadChat(currentChat);
+}
+
+</script>
+
+</body>
+</html>

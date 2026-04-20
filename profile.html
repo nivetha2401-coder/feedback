@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Profile Settings</title>
+
+<style>
+
+
+:root{
+    --bg:#020c1b;
+    --sidebar:#061426;
+    --card:#0b1f3a;
+    --card2:#071a2f;
+    --text:#cfe9ff;
+    --muted:#7fa8c9;
+    --neon:#00f5ff;
+}
+
+/* RESET */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI';
+}
+
+/* BODY */
+body{
+    background:var(--bg);
+    color:var(--text);
+}
+
+/* LAYOUT */
+.container{
+    display:flex;
+    height:100vh;
+}
+
+/* SIDEBAR */
+.sidebar{
+    width:220px;
+    height:100vh;
+    position:fixed;
+    left:0;
+    top:0;
+    background:var(--sidebar);
+    padding:20px;
+}
+
+.logo{
+    font-size:22px;
+    color:var(--neon);
+    margin-bottom:30px;
+}
+
+/* MENU */
+.menu a{
+    display:block;
+    padding:10px;
+    margin-bottom:10px;
+    color:var(--muted);
+    text-decoration:none;
+    border-radius:6px;
+}
+
+.menu a.active{
+    background:var(--card);
+    color:var(--neon);
+}
+
+/* MAIN */
+.main{
+    margin-left:220px;
+    padding:30px;
+    width:100%;
+}
+
+/* TITLE */
+.title{
+    font-size:24px;
+    margin-bottom:5px;
+}
+
+.subtitle{
+    color:var(--muted);
+    margin-bottom:20px;
+}
+
+/* GRID */
+.grid{
+    display:grid;
+    grid-template-columns:2fr 1fr;
+    gap:20px;
+}
+
+/* CARD */
+.card{
+    background:var(--card);
+    padding:20px;
+    border-radius:12px;
+}
+
+.card.small{
+    background:var(--card2);
+}
+
+/* PROFILE */
+.profile{
+    display:flex;
+    gap:15px;
+}
+
+.profile img{
+    width:70px;
+    border-radius:10px;
+}
+
+.profile input{
+    width:100%;
+    padding:10px;
+    margin-top:6px;
+    background:#081424;
+    border:1px solid rgba(255,255,255,0.1);
+    color:var(--text);
+    border-radius:6px;
+}
+
+/* ROW */
+.row{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:12px;
+}
+
+/* BUTTON */
+button{
+    padding:8px 14px;
+    border:none;
+    border-radius:6px;
+    cursor:pointer;
+}
+
+.primary{
+    background:var(--neon);
+    color:black;
+}
+
+.secondary{
+    background:#081424;
+    color:white;
+    border:1px solid rgba(255,255,255,0.1);
+}
+
+/* SWITCH */
+.switch{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:10px;
+}
+
+/* COLORS */
+.colors div{
+    width:22px;
+    height:22px;
+    border-radius:50%;
+    cursor:pointer;
+    display:inline-block;
+    margin-right:10px;
+}
+
+/* ACTIONS */
+.actions{
+    margin-top:25px;
+    display:flex;
+    justify-content:flex-end;
+    gap:10px;
+}
+
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+  <div class="menu">
+     <div class="logo">Atherl</div>
+    <a href="dashboard.html">Home</a>
+    <a href="projects.html">Projects</a>
+    <a href="feedback.html">Feedback</a>
+    <a href="profile.html" class="active">Profile</a>
+  </div>
+</div>
+
+<!-- MAIN -->
+<main class="main">
+
+<div class="title">Profile Settings</div>
+<div class="subtitle">Configure your administrative identity and preferences</div>
+
+<div class="grid">
+
+<!-- LEFT -->
+<div>
+
+<div class="card">
+<h3>Admin Identity</h3>
+
+<div class="profile">
+<img src="https://i.pravatar.cc/100">
+<div style="flex:1;">
+<input id="name" placeholder="Full Name">
+<input id="org" placeholder="Organization">
+<input id="email" placeholder="Email">
+</div>
+</div>
+
+</div>
+
+<div class="card" style="margin-top:20px;">
+<h3>Account Credentials</h3>
+
+<div class="row">
+<span>Two-Factor Authentication</span>
+<button class="secondary" onclick="alert('Coming soon')">Configure</button>
+</div>
+
+<div class="row">
+<span>Master Password</span>
+<button class="secondary" onclick="alert('Coming soon')">Update</button>
+</div>
+
+</div>
+
+</div>
+
+<!-- RIGHT -->
+<div>
+
+<div class="card small">
+<h3>Interface Theme</h3>
+
+<label><input type="radio" name="theme" checked onchange="setTheme('dark')"> Deep Space</label><br>
+<label><input type="radio" name="theme" onchange="setTheme('light')"> Slate</label>
+
+<h4 style="margin-top:10px;">Accent Color</h4>
+
+<div class="colors">
+<div style="background:#38bdf8" onclick="setAccent('#38bdf8')"></div>
+<div style="background:#22c55e" onclick="setAccent('#22c55e')"></div>
+<div style="background:#f472b6" onclick="setAccent('#f472b6')"></div>
+<div style="background:#facc15" onclick="setAccent('#facc15')"></div>
+</div>
+
+</div>
+
+<div class="card small" style="margin-top:20px;">
+<h3>Notifications</h3>
+
+<label class="switch">
+<span>Node Alerts</span>
+<input type="checkbox" id="n1">
+</label>
+
+<label class="switch">
+<span>Performance Reports</span>
+<input type="checkbox" id="n2">
+</label>
+
+<label class="switch">
+<span>Collaborator Updates</span>
+<input type="checkbox" id="n3">
+</label>
+
+</div>
+
+<div class="card small" style="margin-top:20px;">
+<h3>Node Activity</h3>
+<h2 style="color:var(--accent);">99.8%</h2>
+<small style="color:var(--muted);">Optimal performance detected</small>
+</div>
+
+</div>
+
+</div>
+
+<div class="actions">
+<button class="secondary" onclick="loadData()">Discard</button>
+<button class="primary" onclick="saveData()">Commit Changes</button>
+</div>
+
+</main>
+</div>
+
+<script>
+
+/* SAVE */
+function saveData(){
+  const data={
+    name:name.value,
+    org:org.value,
+    email:email.value,
+    n1:n1.checked,
+    n2:n2.checked,
+    n3:n3.checked,
+    accent:getComputedStyle(document.documentElement).getPropertyValue('--accent')
+  };
+  localStorage.setItem("profile",JSON.stringify(data));
+  alert("Saved ✅");
+}
+
+/* LOAD */
+function loadData(){
+  const data=JSON.parse(localStorage.getItem("profile"));
+  if(!data) return;
+
+  name.value=data.name;
+  org.value=data.org;
+  email.value=data.email;
+  n1.checked=data.n1;
+  n2.checked=data.n2;
+  n3.checked=data.n3;
+  setAccent(data.accent);
+}
+
+/* THEME */
+function setTheme(mode){
+  if(mode==="light"){
+    document.documentElement.style.setProperty('--bg','#f1f5f9');
+    document.documentElement.style.setProperty('--text','#000');
+  }else{
+    document.documentElement.style.setProperty('--bg','#0b1320');
+    document.documentElement.style.setProperty('--text','#e5e7eb');
+  }
+}
+
+/* ACCENT */
+function setAccent(color){
+  document.documentElement.style.setProperty('--accent',color);
+}
+
+/* INIT */
+loadData();
+
+</script>
+
+</body>
+</html>

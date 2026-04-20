@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Atherl AI Technology</title>
+
+<style>
+:root{
+    --neon:#00f5ff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+    background: radial-gradient(circle at top, #001a2f, #000814);
+    color: white;
+    height: 100vh;
+}
+
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: flex-end;
+    padding: 15px 30px;
+}
+:root{
+    --neon:#00f5ff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+    background: #020d1c;
+    color: white;
+    height: 100vh;
+}
+
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: flex-end;
+    padding: 15px 30px;
+}
+
+.nav-icons {
+    display: flex;
+    gap: 15px;
+}
+
+.nav-icons div {
+    width: 30px;
+    height: 30px;
+    background: #0d2a45;
+    border-radius: 50%;
+}
+
+/* Center */
+.center {
+    text-align: center;
+}
+
+.logo-img {
+    width: 120px;
+    margin: auto;
+}
+
+.sub {
+    margin-top: -25px;
+    font-size: 14px;
+    letter-spacing: 5px;
+    color: var(--neon);   /* only color */
+}
+
+/* Cards */
+.cards {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    margin-top: 60px;
+}
+
+.card {
+    background: rgba(255,255,255,0.05);
+    padding: 25px;
+    width: 280px;
+    border-radius: 12px;
+}
+
+.card p {
+    color: #9fbad0;
+}
+
+/* Buttons */
+.btn {
+    padding: 8px 16px;
+    border-radius: 6px;
+    border: none;
+    background-color: var(--neon);
+    color: #000;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+/* Bottom */
+.bottom {
+    display: flex;
+    justify-content: space-between;
+    padding: 80px;
+}
+
+.bottom-left span {
+    color: var(--neon);
+}
+
+.points li {
+    color: #9fbad0;
+}
+
+.bottom-right {
+    width: 400px;
+    height: 200px;
+    background: #0b2c4a;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+}
+
+
+</style>
+</head>
+
+<body>
+
+<!-- Navbar -->
+<div class="navbar">
+    <div class="nav-icons">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+</div>
+
+<!-- Center -->
+<div class="center">
+    <img src="logo.png" class="logo-img">
+    <h2 class="sub">AI TECHNOLOGY</h2>
+
+    <div class="cards">
+
+        <!-- Admin -->
+        <div class="card">
+            <h3>Admin</h3>
+            <p>Manage system and users</p>
+            <button class="btn" onclick="goToAdmin()">Enter</button>
+        </div>
+
+        <!-- Client -->
+        <div class="card">
+            <h3>Client</h3>
+            <p>View and use services</p>
+            <button class="btn" onclick="goToClient()">Enter</button>
+        </div>
+
+    </div>
+</div>
+
+<!-- Bottom -->
+<div class="bottom">
+    <div class="bottom-left">
+        <h2>FEEDBACK <br><span>PORTAL</span></h2>
+        <ul class="points">
+            <li>✔ Collect feedback from users easily</li>
+            <li>✔ View and manage all responses</li>
+            <li>✔ Improve services based on feedback</li>
+        </ul>
+    </div>
+
+</div>
+
+<script>
+function goToAdmin(){
+    window.location.href = "Alogin.html";
+}
+
+function goToClient(){
+    window.location.href = "Clogin.html";
+}
+</script>
+
+</body>
+</html>

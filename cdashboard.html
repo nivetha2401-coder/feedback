@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Atherl Dashboard</title>
+
+<style>
+:root{
+    --bg:#020c1b;
+    --sidebar:#061426;
+    --card:#0b1f3a;
+    --text:#cfe9ff;
+    --muted:#7fa8c9;
+    --neon:#00f5ff;
+}
+
+body{
+    margin:0;
+    font-family:'Segoe UI';
+    background:var(--bg);
+    color:var(--text);
+    display:flex;
+}
+
+/* SIDEBAR */
+.sidebar{
+    width:200px;
+    height:100vh;
+    position:fixed;
+    left:0;
+    top:0;
+    background:var(--sidebar);
+    padding:20px;
+}
+
+.logo{
+    font-size:22px;
+    color:var(--neon);
+    margin-bottom:30px;
+}
+
+.menu a{
+    display:block;
+    padding:10px;
+    margin-bottom:10px;
+    color:var(--muted);
+    text-decoration:none;
+    border-radius:6px;
+}
+
+.menu a:hover{
+    background:var(--card);
+    color:var(--neon);
+}
+
+/* MAIN */
+.main{
+    margin-left:220px;
+    padding:25px;
+    flex:1;
+}
+
+/* TOPBAR */
+.topbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.search{
+    background:var(--card);
+    border:none;
+    padding:10px;
+    border-radius:6px;
+    color:white;
+}
+
+/* HERO */
+.hero{
+    background:linear-gradient(135deg,#0b1f3a,#071a2f);
+    padding:25px;
+    border-radius:12px;
+    flex:2;
+}
+
+/* FLEX */
+.flex{
+    display:flex;
+    gap:20px;
+    margin-top:20px;
+}
+
+/* CARD */
+.card{
+    background:linear-gradient(145deg, #0c254a, #081a33);
+    padding:20px;
+    border-radius:12px;
+    flex:1;
+    text-align:center;
+}
+
+/* CIRCLE */
+.circle{
+    width:140px;
+    height:140px;
+    border-radius:50%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:22px;
+    font-weight:bold;
+    position:relative;
+    margin:auto;
+    color:white;
+}
+
+/* INNER */
+.circle::before{
+    content:"";
+    position:absolute;
+    width:100px;
+    height:100px;
+    background:var(--card);
+    border-radius:50%;
+}
+
+.circle span{
+    position:relative;
+    z-index:1;
+}
+
+.circle-text{
+    margin-top:10px;
+    font-size:13px;
+    color:var(--muted);
+}
+
+/* TABLE */
+.table{
+    margin-top:25px;
+    background:var(--card);
+    padding:20px;
+    border-radius:12px;
+}
+
+.row{
+    display:flex;
+    justify-content:space-between;
+    padding:12px 0;
+    border-bottom:1px solid rgba(255,255,255,0.05);
+    cursor:pointer;
+}
+
+.badge{
+    font-size:12px;
+    padding:4px 8px;
+    border-radius:5px;
+    background:#102a4c;
+    color:var(--neon);
+}
+</style>
+
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+    <div class="logo">Atherl</div>
+
+    <div class="menu">
+        <a href="dashboard.html">Home</a>
+        <a href="projects.html">Projects</a>
+        <a href="feedback.html">Feedback</a>
+        <a href="profile.html">Profile</a>
+    </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+    <!-- TOPBAR -->
+    <div class="topbar">
+        <h2>ATHERL AI TECHNOLOGY</h2>
+        <input class="search" placeholder="Search system logs...">
+    </div>
+
+    <!-- HERO + CIRCLE -->
+    <div class="flex">
+
+        <div class="hero">
+            <h2>Welcome Back, Architect</h2>
+            <p style="color:var(--muted); margin-top:10px;">
+                Atherl AI Technology is an AI-powered feedback system that helps 
+                collect, analyze, and improve user experience.
+            </p>
+
+            <div style="margin-top:15px; display:flex; gap:10px;">
+                <span class="badge">Cloud Latency: 12ms</span>
+                <span class="badge">Uptime: 99.9%</span>
+            </div>
+        </div>
+
+        <!-- CIRCLE CARD -->
+        <div class="card">
+            <div class="circle" id="circle">
+                <span id="value">0%</span>
+            </div>
+
+            <div class="circle-text">
+                Core stability operating within optimal thresholds.
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ACTIVE PROJECTS -->
+    <div class="table">
+        <h3>Active Projects</h3>
+        <div id="activeList"></div>
+    </div>
+
+</div>
+
+<script>
+
+/* PROGRESS FUNCTION */
+function setProgress(val){
+    const circle = document.getElementById("circle");
+    const value = document.getElementById("value");
+
+    circle.style.background =
+        `conic-gradient(var(--neon) 0% ${val}%, #0a2a4a ${val}% 100%)`;
+
+    value.innerText = val + "%";
+}
+
+/* INITIAL */
+setProgress(90);
+
+
+/* LOCAL STORAGE PROJECT LOAD */
+let projects = JSON.parse(localStorage.getItem("projects")) || [];
+
+function loadActive(){
+    let box = document.getElementById("activeList");
+    box.innerHTML = "";
+
+    let activeProjects = projects.filter(p => 
+        p.status && p.status.toLowerCase() === "active"
+    );
+
+    if(activeProjects.length === 0){
+        box.innerHTML = "<p style='color:gray'>No active projects</p>";
+        return;
+    }
+
+    activeProjects.forEach(p => {
+        box.innerHTML += `
+            <div class="row" onclick="window.location.href='projects.html'">
+                <span>${p.name}</span>
+                <span class="badge">Active</span>
+            </div>
+        `;
+    });
+}
+
+loadActive();
+
+</script>
+
+</body>
+</html>
